@@ -18,12 +18,14 @@ class index{
             System.out.println("Erro de exceção: " + exception.getMessage());
         }
 
-        // falta regex e fazer o method post
-
-
+        // melhorar para regex
+        textoCifrado = textoCifrado.replace(".", "");
+        textoCifrado = textoCifrado.replace(":", "");
         String[] a = textoCifrado.split(" ");
         String textoDescriptografado = "";
         int aux=0;
+
+        //Juntar todas as palavras descriptografadas
         for(final String texto: a){
             aux++;
             final String portugues = Descriptografar.decriptar(chave, texto);
@@ -34,10 +36,10 @@ class index{
             }else{
                 textoDescriptografado = textoDescriptografado + portugues+" ";
             }
-            
         }
-        System.out.println("\n"+textoCifrado);
-        //System.out.println("\n"+certo);
-        System.out.println("\n"+textoDescriptografado);
+        textoDescriptografado = CriptografarSha1.criptografar(textoDescriptografado);
+        TratarJson.setDescriptografado(textoDescriptografado);
+        
+        ConexaoHttp.sendPost();
     }
 }
