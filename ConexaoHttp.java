@@ -2,8 +2,10 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 
 class ConexaoHttp{    
     public static String sendGet() throws Exception {
@@ -35,29 +37,25 @@ class ConexaoHttp{
         }
 
     }
-    public void sendPost() throws Exception {
+    public static void sendPost() throws Exception {
 
-        String url = "https://httpbin.org/post";
+        String url = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=6ee96b479da667e5e678cb30ee985eadcd980d79";
 
         HttpsURLConnection httpClient = (HttpsURLConnection) new URL(url).openConnection();
 
         //add reuqest header
         httpClient.setRequestMethod("POST");
         httpClient.setRequestProperty("User-Agent", "Mozilla/5.0");
-        httpClient.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-
+        httpClient.setRequestProperty("Content-Type", "application/json");
         // Send post request
         httpClient.setDoOutput(true);
         try (DataOutputStream wr = new DataOutputStream(httpClient.getOutputStream())) {
-            wr.writeBytes(urlParameters);
+            wr.writeBytes(TratarJson.getJson());
             wr.flush();
         }
 
         int responseCode = httpClient.getResponseCode();
         System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
         System.out.println("Response Code : " + responseCode);
 
         try (BufferedReader in = new BufferedReader(
@@ -70,7 +68,7 @@ class ConexaoHttp{
                 response.append(line);
             }
 
-            //print result
+           // print result
             System.out.println(response.toString());
 
         }
