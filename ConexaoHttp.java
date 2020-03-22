@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 
 class ConexaoHttp{    
@@ -38,7 +39,6 @@ class ConexaoHttp{
 
     }
     public static void sendPost() throws Exception {
-
         String url = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=6ee96b479da667e5e678cb30ee985eadcd980d79";
 
         HttpsURLConnection httpClient = (HttpsURLConnection) new URL(url).openConnection();
@@ -53,10 +53,10 @@ class ConexaoHttp{
             wr.writeBytes(TratarJson.getJson());
             wr.flush();
         }
-
-        int responseCode = httpClient.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        System.out.println(TratarJson.getJson());
+        //int responseCode = httpClient.getResponseCode();
+        //System.out.println("\nSending 'POST' request to URL : " + url);
+        //System.out.println("Response Code : " + responseCode);
 
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(httpClient.getInputStream()))) {

@@ -37,9 +37,8 @@ class index{
                 textoDescriptografado = textoDescriptografado + portugues+" ";
             }
         }
-        textoDescriptografado = CriptografarSha1.criptografar(textoDescriptografado);
-        TratarJson.setDescriptografado(textoDescriptografado);
-        
+        String resumo = CriptografarSha1.criptografar(textoDescriptografado);
+        TratarJson.setDescriptografado(textoDescriptografado, resumo);
         ConexaoHttp.sendPost();
     }
 }
