@@ -6,7 +6,7 @@ class CriptografarSha1 {
         try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-1");
 	        digest.reset();
-	        digest.update(textoDescriptografado.getBytes("utf8"));
+            digest.update(textoDescriptografado.getBytes("utf8"));
             String texto = String.format("%040x", new BigInteger(1, digest.digest()));
             return texto;
 		} catch (Exception e){
